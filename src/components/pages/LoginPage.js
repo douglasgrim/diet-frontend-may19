@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import ProvideId from './ProvideId';
-import { v4 } from 'uuid';
 
-import * as actions from '../../actions/userInputActions';
+import * as userInputActions from '../../actions/userInputActions';
+import * as externalActions from '../../actions/externalActions';
+import * as dataActions from '../../actions/dataActions';
 
 
 export class LoginPage extends React.Component {
@@ -13,15 +14,28 @@ export class LoginPage extends React.Component {
 
   render() {
 
-    const { login, pageId } = this.props;
+    const { email, password, userInputActions, externalActions, loggedIn, error } = this.props;
     return (
       <div>
-        <div> {login}
+        <div>{loggedIn ? 'YOU LOGGED' : 'out'}</div>
+        <div>
+          Username:
           <input
-            value={ login }
-            onChange={evt => this.props.actions.userSetText({ [`${pageId}_login`]: evt.target.value })} 
+            type="email"
+            value={ email }
+            onChange={evt => userInputActions.userSetText({ email: evt.target.value })} 
           />
         </div>
+        <div>
+          Password:
+          <input
+            type="password"
+            value={ password }
+            onChange={evt => userInputActions.userSetText({ password: evt.target.value })}
+          />
+        </div>
+        <div><button onClick={() => externalActions.login(email, password)}>Submit</button></div>
+        {error && <div>{error}</div>}
       </div>
     );
   }
@@ -29,19 +43,25 @@ export class LoginPage extends React.Component {
 
 LoginPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  fuelSavings: PropTypes.object.isRequired,
-  userInput: PropTypes.object.isRequired,
+  pageId: PropTypes.string,
+  login: PropTypes.string,
+  password: PropTypes.string,
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
-    login: state.userInput[`${ownProps.pageId}_login`]
+    email: state.userInput.email,
+    password: state.userInput.password,
+    loggedIn: state.data.loggedIn,
+    error: state.data.error,
   };
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    userInputActions: bindActionCreators(userInputActions, dispatch),
+    externalActions: bindActionCreators(externalActions, dispatch),
+    dataActions: bindActionCreators(dataActions, dispatch),
   };
 }
 

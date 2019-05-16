@@ -38,7 +38,11 @@ export default {
       },
       inject: true
     }),
-    new webpack.EnvironmentPlugin(['__FOO__', '__COLOR__'])
+    new webpack.EnvironmentPlugin({
+      __FOO__: 'foo',
+      __COLOR__: 'blue',
+      __URL__: 'http://localhost:3000',
+    })
   ],
   module: {
     rules: [

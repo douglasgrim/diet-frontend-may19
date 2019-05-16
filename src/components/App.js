@@ -1,8 +1,9 @@
 /* eslint-disable import/no-named-as-default */
 import { Link, Route, Switch } from "react-router-dom";
+import { connect } from 'react-redux';
 
 import LoginPage from './pages/LoginPage';
-import NotFoundPage from "./NotFoundPage";
+import BoomPage from './pages/BoomPage';
 import PropTypes from "prop-types";
 import React from "react";
 import { hot } from "react-hot-loader";
@@ -12,16 +13,18 @@ import { hot } from "react-hot-loader";
 // component at the top-level.
 
 class App extends React.Component {
+
   render() {
-    const activeStyle = { color: 'blue' };
+    const { token } = this.props;
     return (
       <div>
         <div>
-          Header goes here
+          Header goes here {token}
         </div>
         <Switch>
           <Route exact path="/" component={LoginPage} />
-          <Route component={NotFoundPage} />
+          {token && <Route exact path="/boom" component={BoomPage} />}
+          <Route component={LoginPage} />
         </Switch>
       </div>
     );
@@ -32,4 +35,6 @@ App.propTypes = {
   children: PropTypes.element
 };
 
-export default hot(module)(App);
+const mapStateToProps = ({ data: { token } }) => ({ token });
+
+export default connect(mapStateToProps)(hot(module)(App));
