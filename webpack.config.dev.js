@@ -37,7 +37,8 @@ export default {
         collapseWhitespace: true
       },
       inject: true
-    })
+    }),
+    new webpack.EnvironmentPlugin(['__FOO__', '__COLOR__'])
   ],
   module: {
     rules: [
@@ -104,7 +105,7 @@ export default {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
             }
           }, {
             loader: 'postcss-loader',

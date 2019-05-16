@@ -1,2 +1,3 @@
-export const SAVE_FUEL_SAVINGS = 'SAVE_FUEL_SAVINGS';
-export const CALCULATE_FUEL_SAVINGS = 'CALCULATE_FUEL_SAVINGS';
+export const SET_DATUM = 'SET_DATUM';
+export const SET_DATA = 'SET_DATA';
+export const USER_SET_TEXT = 'USER_SET_TEXT';
