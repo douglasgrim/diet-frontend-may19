@@ -41,7 +41,7 @@ export default {
     new webpack.EnvironmentPlugin({
       __FOO__: 'foo',
       __COLOR__: 'blue',
-      __URL__: 'http://localhost:3000',
+      URL: 'https://hwis2fcqc7.execute-api.us-west-2.amazonaws.com/default/goMongo',
     })
   ],
   module: {

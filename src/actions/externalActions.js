@@ -1,4 +1,4 @@
-const url = process.env.__URL__;
+const url = 'https://hwis2fcqc7.execute-api.us-west-2.amazonaws.com/default/Coors';
 
 import { history } from '../store/configureStore';
 

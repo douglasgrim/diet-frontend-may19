@@ -58,7 +58,7 @@ export default {
       trackJSToken: ''
     }),
 
-    new webpack.EnvironmentalPlugin({
+    new webpack.EnvironmentPlugin({
       __URL__: 'https://bp7cwwb8x1.execute-api.us-west-2.amazonaws.com/default/goMongo'
     })
 
