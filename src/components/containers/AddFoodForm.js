@@ -23,7 +23,7 @@ const AddFoodForm = (prop) => {
         'shortDesc',
         'servingSize',
       ].map(key => (
-        <div key={key}>
+        <div key={key} className="add-food-form">
           <span>{key}</span>
           <input
             type="text"
