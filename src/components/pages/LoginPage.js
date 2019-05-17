@@ -6,7 +6,6 @@ import ProvideId from './ProvideId';
 
 import * as userInputActions from '../../actions/userInputActions';
 import * as externalActions from '../../actions/externalActions';
-import * as dataActions from '../../actions/dataActions';
 
 
 export class LoginPage extends React.Component {
@@ -42,7 +41,6 @@ export class LoginPage extends React.Component {
 }
 
 LoginPage.propTypes = {
-  actions: PropTypes.object.isRequired,
   pageId: PropTypes.string,
   login: PropTypes.string,
   password: PropTypes.string,
@@ -61,7 +59,6 @@ function mapDispatchToProps(dispatch) {
   return {
     userInputActions: bindActionCreators(userInputActions, dispatch),
     externalActions: bindActionCreators(externalActions, dispatch),
-    dataActions: bindActionCreators(dataActions, dispatch),
   };
 }
 

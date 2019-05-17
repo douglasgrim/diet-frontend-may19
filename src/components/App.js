@@ -3,7 +3,7 @@ import { Link, Route, Switch } from "react-router-dom";
 import { connect } from 'react-redux';
 
 import LoginPage from './pages/LoginPage';
-import BoomPage from './pages/BoomPage';
+import HomePage from './pages/HomePage';
 import PropTypes from "prop-types";
 import React from "react";
 import { hot } from "react-hot-loader";
@@ -19,11 +19,13 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          Header goes here {token}
+          Header
         </div>
         <Switch>
           <Route exact path="/" component={LoginPage} />
-          {token && <Route exact path="/boom" component={BoomPage} />}
+          {token && <React.Fragment>
+            <Route exact path="/home" component={HomePage} />
+          </React.Fragment>}
           <Route component={LoginPage} />
         </Switch>
       </div>

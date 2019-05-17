@@ -1,30 +1,29 @@
-const url = 'https://hwis2fcqc7.execute-api.us-west-2.amazonaws.com/default/Coors';
+import { keyBy } from 'lodash';
 
+import remoteData from '../utils/remoteData';
 import { history } from '../store/configureStore';
-
 import { setData } from './dataActions';
 
 export const login = (email, password) => (dispatch) => {
-
   dispatch(setData({ error: '' }));
-  fetch(url, {
-    method: 'POST',
-    body: JSON.stringify({
-      type: 'LOGIN',
-      email,
-      password,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  .then(response => response.json())
+  remoteData('LOGIN', { email, password })
   .then(({ token }) => {
     if (token) {
-      history.push('/boom');
-      return dispatch(setData({ token, error: '' }))
+      history.push('/home');
+      dispatch(setData({ token, error: '' }))
     } else {
-      return dispatch(setData({ error: 'Login Failed' }))
+      dispatch(setData({ error: 'Login Failed' }))
     }
   })
 }
+
+export const searchFood = (searchTerm) => (dispatch, getState) => {
+  const { token } = getState().data;
+  remoteData('SEARCH_USER_FOOD', { searchTerm, limit: 100 }, token)
+  .then(({ result, jwt }) => {
+    dispatch(setData({ token: jwt }));
+    const dataMap = keyBy(result, '_id');
+    dispatch(setData({ ...dataMap }));
+    dispatch(setData({ searchResults: Object.keys(dataMap) }))
+  })
+};
