@@ -1,4 +1,4 @@
-const URL = 'https://m9eofotl0j.execute-api.us-west-2.amazonaws.com/default/diet';
+const URL = process.env.URL;
 
 const remoteData = (type, payload, Authorization = '') =>
   fetch(URL, {

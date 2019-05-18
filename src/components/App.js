@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
+import DetailPage from './pages/DetailPage';
+
 import PropTypes from "prop-types";
 import React from "react";
 import { hot } from "react-hot-loader";
@@ -17,17 +19,20 @@ class App extends React.Component {
   render() {
     const { token } = this.props;
     return (
-      <div>
-        <div>
-          Header
+      <div className="app">
+        <div className="app-contents">
+          <div>
+            Header
+          </div>
+          <Switch>
+            <Route exact path="/" component={LoginPage} />
+            {token && <React.Fragment>
+              <Route exact path="/home" component={HomePage} />
+              <Route exact path="/detail/:foodId" component={DetailPage} />
+            </React.Fragment>}
+            <Route component={LoginPage} />
+          </Switch>
         </div>
-        <Switch>
-          <Route exact path="/" component={LoginPage} />
-          {token && <React.Fragment>
-            <Route exact path="/home" component={HomePage} />
-          </React.Fragment>}
-          <Route component={LoginPage} />
-        </Switch>
       </div>
     );
   }

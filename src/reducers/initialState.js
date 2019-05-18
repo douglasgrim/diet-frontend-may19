@@ -3,8 +3,8 @@ export default {
     token: null,
   },
   userInput: {
-    email: 'douglas.grim.123@gmail.com',
-    password: 'foobar',
+    email: '',
+    password: '',
     search: '',
   },
 };

@@ -59,7 +59,7 @@ export default {
     }),
 
     new webpack.EnvironmentPlugin({
-      __URL__: 'https://bp7cwwb8x1.execute-api.us-west-2.amazonaws.com/default/goMongo'
+      URL: 'https://m9eofotl0j.execute-api.us-west-2.amazonaws.com/default/diet'
     })
 
   ],
