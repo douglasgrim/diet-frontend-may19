@@ -7,3 +7,10 @@ export const userSetText = (value) => (dispatch) => {
   })
 };
 
+export const userClear = () => dispatch => {
+  dispatch({
+    type: types.USER_CLEAR,
+  })
+};
+
+

@@ -19,6 +19,7 @@ export class BoomPage extends React.Component {
       search,
       userInputActions,
       externalActions,
+      navigateActions,
       list,
       loadingIndicator,
     } = this.props;
@@ -59,7 +60,7 @@ const mapStateToProps = ({ userInput: {
   servingSize,
 }, data }) => {
   const { searchResults = [], loadingIndicator } = data;
-  const list = searchResults.map(key => data[key]);
+  const list = searchResults.map(key => data[key]).filter(result => result);
   return {
     search,
     list,

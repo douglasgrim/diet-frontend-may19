@@ -3,6 +3,7 @@ import { keyBy } from 'lodash';
 import remoteData from '../utils/remoteData';
 import { history } from '../store/configureStore';
 import { setData } from './dataActions';
+import { userClear } from './userInputActions';
 
 export const login = (email, password) => (dispatch) => {
   dispatch(setData({
@@ -26,10 +27,10 @@ export const searchFood = (searchTerm) => (dispatch, getState) => {
   dispatch(setData({ loadingIndicator: true }));
   remoteData('SEARCH_FOOD', { searchTerm, limit: 100 }, token)
   .then(({ result, jwt }) => {
-    dispatch(setData({ token: jwt }));
     const dataMap = keyBy(result, '_id');
     dispatch(setData({ 
       ...dataMap,
+      token: jwt,
       loadingIndicator: false,
       searchResults: Object.keys(dataMap),
     }));
@@ -42,14 +43,24 @@ export const addFood = (params) => (dispatch, getState) => {
   remoteData('ADD_FOOD', params, token)
   .then(() => {
     dispatch(setData({ loadingIndicator: false }));
+    dispatch(userClear());
   })
 }
 
-export const addConsume = ({ foodId, servings }) => (dispatch, getState) => {
+export const removeFood = (foodId) => (dispatch, getState) => {
   const { token } = getState().data;
   dispatch(setData({ loadingIndicator: true }));
-  remoteData('ADD_CONSUME', { foodId, servings }, token)
-  .then(() => {
+  remoteData('REMOVE_FOOD', { foodId }, token)
+  .then(({ result: { err } }) => {
     dispatch(setData({ loadingIndicator: false }));
+    if (err) {
+      dispatch(setData({ error: err }));
+    } else {
+      history.push('/home');
+      dispatch(setData({
+        [foodId]: null,
+      }));       
+    }
+   
   })
 }
