@@ -5,3 +5,8 @@ export const showDetail = (foodId) => dispatch => {
   history.push(`/detail/${foodId}`);
   dispatch(userClear());
 }
+
+export const addFoodGroup = () => dispatch => {
+  history.push(`/add-food-group`);
+  dispatch(userClear()); 
+}

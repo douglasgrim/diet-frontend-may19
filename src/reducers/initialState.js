@@ -6,5 +6,6 @@ export default {
     email: '',
     password: '',
     search: '',
+    groupContents: [],
   },
 };

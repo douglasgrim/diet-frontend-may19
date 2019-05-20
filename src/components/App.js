@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import DetailPage from './pages/DetailPage';
+import AddFoodGroupPage from './pages/AddFoodGroupPage';
 
 import PropTypes from "prop-types";
 import React from "react";
@@ -29,6 +30,7 @@ class App extends React.Component {
             {token && <React.Fragment>
               <Route exact path="/home" component={HomePage} />
               <Route exact path="/detail/:foodId" component={DetailPage} />
+              <Route exact path="/add-food-group" component={AddFoodGroupPage} />
             </React.Fragment>}
             <Route component={LoginPage} />
           </Switch>

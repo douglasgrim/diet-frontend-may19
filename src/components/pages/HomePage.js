@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import LoadingIndicator from '../simple/LoadingIndicator';
-import DebouncedInput from '../simple/DebouncedInput';
 
 import AddFoodForm from '../containers/AddFoodForm';
 
-import * as userInputActions from '../../actions/userInputActions';
-import * as externalActions from '../../actions/externalActions';
-import * as navigateActions from '../../actions/navigateActions';
+import SearchFoodForm from '../containers/SearchFoodForm';
+
+import ProvideActions from '../hoc/ProvideActions';
 
 
 export class BoomPage extends React.Component {
@@ -23,27 +20,20 @@ export class BoomPage extends React.Component {
       list,
       loadingIndicator,
     } = this.props;
+
     return (
       <div>
         <div>Search</div>
-        <div>
-          <DebouncedInput
-            type="text"
-            value={ search }
-            onChange={value => userInputActions.userSetText({ search: value })}
-            debouncedFunc={value => externalActions.searchFood(value)}
-            debouncedTime={500}
-          />
-          <button onClick={() => externalActions.searchFood(search)}>Search</button>
-        </div>
-        <div>{ list.map(food => (
-          <div key={food._id} onClick={() => navigateActions.showDetail(food._id)}>
-            {food.shortDesc}
-          </div>
-        )) }
-          <AddFoodForm {...this.props} />
-          { loadingIndicator && <LoadingIndicator /> }
-        </div>
+        <div onClick={() => navigateActions.addFoodGroup()}>Add Food Group</div>
+        <SearchFoodForm 
+          search={search}
+          userSetText={userInputActions.userSetText}
+          searchFood={externalActions.searchFood}
+          list={list}
+          loadingIndicator={loadingIndicator}
+          resultClick={(foodId) => navigateActions.showDetail(foodId)}
+        />
+        <AddFoodForm {...this.props} />
       </div>
     );
   }
@@ -75,10 +65,6 @@ const mapStateToProps = ({ userInput: {
   };
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  userInputActions: bindActionCreators(userInputActions, dispatch),
-  externalActions: bindActionCreators(externalActions, dispatch),
-  navigateActions: bindActionCreators(navigateActions, dispatch),
-});
+const actionWrapped = ProvideActions(BoomPage);
+export default connect(mapStateToProps)(actionWrapped);
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoomPage);

@@ -13,4 +13,16 @@ export const userClear = () => dispatch => {
   })
 };
 
+export const clearSearch = () => dispatch => {
+  dispatch(userSetText({ searchResults: [] }));
+};
+
+export const addFoodToGroup = (foodId) => dispatch => {
+  dispatch({
+    type: types.ADD_FOOD_TO_GROUP,
+    foodId,
+  })
+}
+
+
 
