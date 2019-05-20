@@ -7,3 +7,7 @@ export const setData = (value) => (dispatch) => {
   })
 };
 
+export const clearSearches = () => dispatch => {
+  dispatch(setData({ searchResults: [] }));
+};
+
