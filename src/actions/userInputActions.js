@@ -17,10 +17,11 @@ export const clearSearch = () => dispatch => {
   dispatch(userSetText({ searchResults: [] }));
 };
 
-export const addFoodToGroup = (foodId) => dispatch => {
+export const addFoodToGroup = (foodId, servings) => dispatch => {
   dispatch({
     type: types.ADD_FOOD_TO_GROUP,
     foodId,
+    servings,
   })
 }
 

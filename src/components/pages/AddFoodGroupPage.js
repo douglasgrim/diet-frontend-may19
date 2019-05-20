@@ -12,6 +12,7 @@ const AddFoodGroupPage = ({
   navigateActions,
   list,
   loadingIndicator,
+  groupContents,
 }) => (
   <div className="add-food-group-page">
     <h2>Add Group Page</h2>
@@ -21,18 +22,20 @@ const AddFoodGroupPage = ({
       searchFood={externalActions.searchFood}
       list={list}
       loadingIndicator={loadingIndicator}
-      resultClick={(foodId) => navigateActions.showDetail(foodId)}
+      resultClick={(foodId) => userInputActions.addFoodToGroup(foodId, 1)}
     />
+    <div>{JSON.stringify(groupContents)}</div>
   </div>
 );
 
-const mapStateToProps = ({ data, userInput: { search }}) => {
+const mapStateToProps = ({ data, userInput: { search, groupContents }}) => {
   const { searchResults=[], loadingIndicator } = data;
   const list = searchResults.map(key => data[key]).filter(result => result);
   return {
     list,
     loadingIndicator,
     search,
+    groupContents,
   }
 }
 
