@@ -3,6 +3,7 @@
 $vin-blue: #5bb7db;
 $vin-green: #60b044;
 $red: #791919;
+$lt-blue: #dffdbd;
 
 /* Styles */
 body {
@@ -45,7 +46,7 @@ h2 {
 
 .app {
   padding: 20px;
-  background-color: aliceblue;
+  background-color: $lt-blue;
   height: 100vh;
   width: 100vw;
   display: flex;
