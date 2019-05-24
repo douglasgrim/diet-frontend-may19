@@ -24,19 +24,8 @@ class AddFoodForm extends React.Component {
         energKcal,
         shortDesc,
         servingSize,
+        processFood,
       } = this.props;
-
-      const addFood = () => {
-        externalActions.addFood({
-          protein: Number(protein) || 0,
-          shortDesc,
-          lipidTot: Number(lipidTot) || 0,
-          carbohydrt: Number(carbohydrt) || 0,
-          servingSize: Number(servingSize) || 0,
-          sugarTot: Number(sugarTot) || 0,
-          energKcal: Number(energKcal) || 0,
-        });
-      }
 
       return (
         <div className="add-food-form">
@@ -72,7 +61,7 @@ class AddFoodForm extends React.Component {
               </div>
             </div>
           ))}
-          <div><button onClick={addFood}>ADD</button></div>
+          <div><button onClick={() => processFood()}>ADD</button></div>
         </div>
       );
 

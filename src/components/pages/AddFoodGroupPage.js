@@ -40,5 +40,4 @@ const mapStateToProps = ({ data, userInput: { search, groupContents }}) => {
 }
 
 const act = ProvideActions(AddFoodGroupPage);
-
 export default connect(mapStateToProps)(act);

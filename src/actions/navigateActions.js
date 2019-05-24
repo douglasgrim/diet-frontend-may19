@@ -1,5 +1,5 @@
 import { history } from '../store/configureStore';
-import { userClear } from './userInputActions';
+import { userClear, userSetText } from './userInputActions';
 import { clearSearches } from './dataActions';
 
 export const showDetail = (foodId) => dispatch => {
@@ -11,4 +11,9 @@ export const addFoodGroup = () => dispatch => {
   history.push(`/add-food-group`);
   dispatch(userClear());
   dispatch(clearSearches());
+}
+
+export const editFood = (foodId, food) => (dispatch) => {
+  dispatch(userSetText(food));
+  history.push(`/edit-food/${foodId}`);
 }

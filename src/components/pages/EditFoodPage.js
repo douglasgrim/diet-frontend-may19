@@ -9,7 +9,7 @@ import SearchFoodForm from '../containers/SearchFoodForm';
 import ProvideActions from '../hoc/ProvideActions';
 
 
-export class BoomPage extends React.Component {
+export class EditFoodPage extends React.Component {
 
   render() {
     const {
@@ -28,8 +28,8 @@ export class BoomPage extends React.Component {
       servingSize,
     } = this.props;
 
-          const addFood = () => {
-        externalActions.addFood({
+      const editFood = () => {
+        externalActions.editFood({
           protein: Number(protein) || 0,
           shortDesc,
           lipidTot: Number(lipidTot) || 0,
@@ -42,19 +42,10 @@ export class BoomPage extends React.Component {
 
     return (
       <div>
-        <div>Search</div>
-        <div onClick={() => navigateActions.addFoodGroup()}>Add Food Group</div>
-        <SearchFoodForm 
-          search={search}
-          userSetText={userInputActions.userSetText}
-          searchFood={externalActions.searchFood}
-          list={list}
-          loadingIndicator={loadingIndicator}
-          resultClick={(foodId) => navigateActions.showDetail(foodId)}
-        />
+        <div>EDIT THE FOOD!</div>
         <AddFoodForm
           {...this.props}
-          processFood={addFood}
+          processFood={editFood}
         />
       </div>
     );
@@ -87,6 +78,6 @@ const mapStateToProps = ({ userInput: {
   };
 }
 
-const actionWrapped = ProvideActions(BoomPage);
+const actionWrapped = ProvideActions(EditFoodPage);
 export default connect(mapStateToProps)(actionWrapped);
 

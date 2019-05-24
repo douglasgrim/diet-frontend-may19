@@ -47,6 +47,17 @@ export const addFood = (params) => (dispatch, getState) => {
   })
 }
 
+export const editFood = (params) => (dispatch, getState) => {
+  const { token } = getState().data;
+  dispatch(setData({ loadingIndicator: true }));
+  remoteData('EDIT_FOOD', params, token)
+  .then(() => {
+    dispatch(setData({ loadingIndicator: false }));
+    dispatch(userClear());
+  })
+}
+
+
 export const removeFood = (foodId) => (dispatch, getState) => {
   const { token } = getState().data;
   dispatch(setData({ loadingIndicator: true }));
@@ -61,6 +72,5 @@ export const removeFood = (foodId) => (dispatch, getState) => {
         [foodId]: null,
       }));       
     }
-   
   })
 }

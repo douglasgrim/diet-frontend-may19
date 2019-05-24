@@ -5,7 +5,15 @@ import LoadingIndicator from '../simple/LoadingIndicator';
 
 import * as externalActions from '../../actions/externalActions';
 
-const DetailPage = ({ food, loadingIndicator, externalActions, error }) => {
+import ProvideActions from '../hoc/ProvideActions';
+
+const DetailPage = ({
+  food,
+  loadingIndicator,
+  externalActions,
+  navigateActions,
+  error
+}) => {
   const {
     _id,
     userEntered,
@@ -28,6 +36,7 @@ const DetailPage = ({ food, loadingIndicator, externalActions, error }) => {
       {lipidTot ? <div>Fat: {lipidTot} g</div> : <div>No fat</div>}
       <div>Calories: {energKcal}</div>
       <div><button onClick={() => externalActions.removeFood(_id)}>DELETE FOOD!</button></div>
+      <div><button onClick={() => navigateActions.editFood(_id, food)}>Edit Food</button></div>
       {loadingIndicator && <LoadingIndicator />}
       {error && <div>{error}</div>}
     </div>
@@ -45,4 +54,5 @@ const mapDispatchToProps = (dispatch) => ({
   externalActions: bindActionCreators(externalActions, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailPage);
+const actWrapped = ProvideActions(DetailPage);
+export default connect(mapStateToProps, mapDispatchToProps)(actWrapped);
