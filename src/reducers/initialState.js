@@ -7,5 +7,6 @@ export default {
     password: '',
     search: '',
     groupContents: [],
+    groupName: 'cray crayyyy',
   },
 };

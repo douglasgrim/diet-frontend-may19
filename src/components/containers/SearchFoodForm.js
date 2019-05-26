@@ -10,6 +10,7 @@ const SearchFoodForm = (props) => {
     list,
     loadingIndicator,
     resultClick,
+    children
   } = props;
   return (
     <div className="search-food-form">
@@ -23,13 +24,7 @@ const SearchFoodForm = (props) => {
         />
         <button onClick={() => searchFood(search)}>Search</button>
       </div>
-      <div>{ list.map(food => (
-        <div key={food._id} onClick={() => resultClick(food._id)}>
-          {food.shortDesc}
-        </div>
-      )) }
-        { loadingIndicator && <LoadingIndicator /> }
-      </div>
+      {children}
     </div>
   );
 };

@@ -51,7 +51,14 @@ export class BoomPage extends React.Component {
           list={list}
           loadingIndicator={loadingIndicator}
           resultClick={(foodId) => navigateActions.showDetail(foodId)}
-        />
+        >
+          <div>{ list.map(food => (
+            <div key={food._id} onClick={() => resultClick(food._id)}>
+              {food.shortDesc}
+            </div>
+          )) }
+          </div>
+        </SearchFoodForm>
         <AddFoodForm
           {...this.props}
           processFood={addFood}
