@@ -21,5 +21,14 @@ export const addFoodToGroup = (foodId, servings) => dispatch => {
   })
 }
 
+export const editGroupServings = (foodId, servings) => dispatch => {
+  console.log('editing group servings', foodId, servings);
+  dispatch({
+    type: types.EDIT_GROUP_SERVINGS,
+    foodId,
+    servings,
+  })
+}
+
 
 

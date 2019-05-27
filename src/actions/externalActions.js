@@ -45,9 +45,11 @@ export const login = (email, password) => (dispatch) => {
   })
 }
 
-export const searchFood = (searchTerm) => (dispatch) => {
+export const searchFood = (searchTerm, userOnly) => (dispatch) => {
+  const type = userOnly ? 'SEARCH_USER_FOOD' : 'SEARCH_FOOD';
+  console.log('TYPE:', type);
   dispatch(init())
-  .then(token => remoteData('SEARCH_FOOD', { searchTerm, limit: 100 }, token))
+  .then(token => remoteData(type, { searchTerm, limit: 100 }, token))
   .then(({ result, jwt }) => {
     dispatch(handleSearch(result, jwt));
   })
@@ -62,10 +64,9 @@ export const addFood = (params) => (dispatch) => {
   })
 }
 
-export const editFood = (params) => (dispatch, getState) => {
-  const { token } = getState().data;
-  dispatch(setData({ loadingIndicator: true }));
-  remoteData('EDIT_FOOD', params, token)
+export const editFood = (params) => (dispatch) => {
+  dispatch(init())
+  .then(token => remoteData('EDIT_FOOD', params, token))
   .then(() => {
     dispatch(setData({ loadingIndicator: false }));
     dispatch(userClear());

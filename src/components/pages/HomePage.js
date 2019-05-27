@@ -28,7 +28,7 @@ export class BoomPage extends React.Component {
       servingSize,
     } = this.props;
 
-          const addFood = () => {
+      const addFood = () => {
         externalActions.addFood({
           protein: Number(protein) || 0,
           shortDesc,
@@ -47,13 +47,13 @@ export class BoomPage extends React.Component {
         <SearchFoodForm 
           search={search}
           userSetText={userInputActions.userSetText}
-          searchFood={externalActions.searchFood}
+          searchForValue={externalActions.searchFood}
           list={list}
           loadingIndicator={loadingIndicator}
           resultClick={(foodId) => navigateActions.showDetail(foodId)}
         >
           <div>{ list.map(food => (
-            <div key={food._id} onClick={() => resultClick(food._id)}>
+            <div key={food._id} onClick={() => navigateActions.showDetail(food._id)}>
               {food.shortDesc}
             </div>
           )) }

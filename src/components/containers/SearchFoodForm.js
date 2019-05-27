@@ -1,15 +1,13 @@
 import React from 'react';
-import LoadingIndicator from '../simple/LoadingIndicator';
+import PropTypes from 'prop-types';
 import DebouncedInput from '../simple/DebouncedInput';
 
 const SearchFoodForm = (props) => {
   const {
     search,
     userSetText,
-    searchFood,
-    list,
-    loadingIndicator,
-    resultClick,
+    searchForValue,
+    debouncedTime,
     children
   } = props;
   return (
@@ -19,10 +17,10 @@ const SearchFoodForm = (props) => {
           type="text"
           value={ search }
           onChange={value => userSetText({ search: value })}
-          debouncedFunc={value => searchFood(value)}
-          debouncedTime={500}
+          debouncedFunc={value => searchForValue(value, true)}
+          debouncedTime={debouncedTime}
         />
-        <button onClick={() => searchFood(search)}>Search</button>
+        <button onClick={() => searchForValue(search)}>Search</button>
       </div>
       {children}
     </div>
@@ -30,7 +28,16 @@ const SearchFoodForm = (props) => {
 };
 
 SearchFoodForm.propTypes = {
+  search: PropTypes.string,
+  userSetText: PropTypes.func,
+  children: PropTypes.node,
+  searchForValue: PropTypes.func,
+  debouncedTime: PropTypes.number,
+}
+
+SearchFoodForm.defaultValue = {
   resultClick: () => {},
+  debouncedTime: 500,
 }
 
 export default SearchFoodForm;

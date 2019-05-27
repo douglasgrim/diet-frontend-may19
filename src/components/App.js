@@ -1,6 +1,8 @@
 /* eslint-disable import/no-named-as-default */
-import { Link, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { connect } from 'react-redux';
+
+import ProvideActions from './hoc/ProvideActions';
 
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
@@ -19,12 +21,15 @@ import { hot } from "react-hot-loader";
 class App extends React.Component {
 
   render() {
-    const { token } = this.props;
+    const {
+      token,
+      navigateActions,
+    } = this.props;
     return (
       <div className="app">
         <div className="app-contents">
-          <div>
-            Header
+          <div onClick={() => navigateActions.goHome()}>
+            &lt;- HOME
           </div>
           <Switch>
             <Route exact path="/" component={LoginPage} />
@@ -48,4 +53,6 @@ App.propTypes = {
 
 const mapStateToProps = ({ data: { token } }) => ({ token });
 
-export default connect(mapStateToProps)(hot(module)(App));
+const provideWrapped = ProvideActions(App);
+
+export default connect(mapStateToProps)(hot(module)(provideWrapped));

@@ -9,7 +9,8 @@ const titles = {
   carbohydrt: 'Carbohydrates (g)',
   energKcal: 'Calories',
   shortDesc: 'Food Name',
-  servingSize: 'Serving Size (g)'
+  servingSize: 'Serving Size (g)',
+  alcohol: 'Alcohol (g)',
 }
 
 class AddFoodForm extends React.Component {
@@ -35,7 +36,7 @@ class AddFoodForm extends React.Component {
               <DebouncedInput
                 value={this.props.shortDesc}
                 onChange={value => userInputActions.userSetText({ shortDesc: value })}
-                onEnter={() => addFood()}
+                onEnter={() => processFood()}
                 type="text"
               />
             </div>
@@ -47,6 +48,7 @@ class AddFoodForm extends React.Component {
             'lipidTot',
             'sugarTot',
             'carbohydrt',
+            'alcohol',
           ].map(key => (
             <div key={key} className="row">
               <div className="title">{titles[key]}</div>
@@ -54,7 +56,7 @@ class AddFoodForm extends React.Component {
                 <DebouncedInput
                   value={this.props[key]}
                   onChange={value => userInputActions.userSetText({ [key]: value })}
-                  onEnter={() => addFood()}
+                  onEnter={() => processFood()}
                   validate="^\d*$"
                   type="number"
                 />

@@ -26,19 +26,21 @@ export class EditFoodPage extends React.Component {
       energKcal,
       shortDesc,
       servingSize,
+      match: { params: { foodId } },
     } = this.props;
 
-      const editFood = () => {
-        externalActions.editFood({
-          protein: Number(protein) || 0,
-          shortDesc,
-          lipidTot: Number(lipidTot) || 0,
-          carbohydrt: Number(carbohydrt) || 0,
-          servingSize: Number(servingSize) || 0,
-          sugarTot: Number(sugarTot) || 0,
-          energKcal: Number(energKcal) || 0,
-        });
-      }
+    const editFood = () => {
+      externalActions.editFood({
+        protein: Number(protein) || 0,
+        shortDesc,
+        lipidTot: Number(lipidTot) || 0,
+        carbohydrt: Number(carbohydrt) || 0,
+        servingSize: Number(servingSize) || 0,
+        sugarTot: Number(sugarTot) || 0,
+        energKcal: Number(energKcal) || 0,
+        foodId,
+      });
+    }
 
     return (
       <div>

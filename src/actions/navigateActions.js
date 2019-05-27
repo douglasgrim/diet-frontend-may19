@@ -17,3 +17,8 @@ export const editFood = (foodId, food) => (dispatch) => {
   dispatch(userSetText(food));
   history.push(`/edit-food/${foodId}`);
 }
+
+export const goHome = () => (dispatch) => {
+  dispatch(userClear());
+  history.push('/home');
+}
