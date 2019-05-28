@@ -26,6 +26,7 @@ export class EditFoodPage extends React.Component {
       energKcal,
       shortDesc,
       servingSize,
+      alcohol,
       match: { params: { foodId } },
     } = this.props;
 
@@ -63,6 +64,7 @@ const mapStateToProps = ({ userInput: {
   energKcal,
   shortDesc,
   servingSize,
+  alcohol,
 }, data }) => {
   const { searchResults = [], loadingIndicator } = data;
   const list = searchResults.map(key => data[key]).filter(result => result);
@@ -77,6 +79,7 @@ const mapStateToProps = ({ userInput: {
     shortDesc,
     servingSize,
     loadingIndicator,
+    alcohol,
   };
 }
 

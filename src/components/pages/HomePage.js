@@ -26,6 +26,7 @@ export class BoomPage extends React.Component {
       energKcal,
       shortDesc,
       servingSize,
+      alcohol,
     } = this.props;
 
       const addFood = () => {
@@ -37,6 +38,7 @@ export class BoomPage extends React.Component {
           servingSize: Number(servingSize) || 0,
           sugarTot: Number(sugarTot) || 0,
           energKcal: Number(energKcal) || 0,
+          alcohol: Number(alcohol) || 0,
         });
       }
 
@@ -77,6 +79,7 @@ const mapStateToProps = ({ userInput: {
   energKcal,
   shortDesc,
   servingSize,
+  alcohol,
 }, data }) => {
   const { searchResults = [], loadingIndicator } = data;
   const list = searchResults.map(key => data[key]).filter(result => result);
@@ -91,6 +94,7 @@ const mapStateToProps = ({ userInput: {
     shortDesc,
     servingSize,
     loadingIndicator,
+    alcohol,
   };
 }
 

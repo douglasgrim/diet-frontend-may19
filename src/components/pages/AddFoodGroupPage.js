@@ -50,6 +50,7 @@ const AddFoodGroupPage = ({
             <DebouncedInput
               value={servings}
               onChange={value => userInputActions.editGroupServings(food._id, value)}
+              validate="^[\d\.]*$"
             />
           </div>
         ))}

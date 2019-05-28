@@ -23,6 +23,7 @@ class AddFoodForm extends React.Component {
         sugarTot,
         carbohydrt,
         energKcal,
+        alcohol,
         shortDesc,
         servingSize,
         processFood,
@@ -57,7 +58,7 @@ class AddFoodForm extends React.Component {
                   value={this.props[key]}
                   onChange={value => userInputActions.userSetText({ [key]: value })}
                   onEnter={() => processFood()}
-                  validate="^\d*$"
+                  validate="^[\d\.]*$"
                   type="number"
                 />
               </div>
