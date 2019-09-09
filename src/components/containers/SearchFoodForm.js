@@ -8,7 +8,8 @@ const SearchFoodForm = (props) => {
     userSetText,
     searchForValue,
     debouncedTime,
-    children
+    children,
+    userFoodOnly,
   } = props;
   return (
     <div className="search-food-form">
@@ -17,7 +18,7 @@ const SearchFoodForm = (props) => {
           type="text"
           value={ search }
           onChange={value => userSetText({ search: value })}
-          debouncedFunc={value => searchForValue(value, true)}
+          debouncedFunc={value => searchForValue(value, userFoodOnly)}
           debouncedTime={debouncedTime}
         />
         <button onClick={() => searchForValue(search)}>Search</button>
@@ -33,6 +34,7 @@ SearchFoodForm.propTypes = {
   children: PropTypes.node,
   searchForValue: PropTypes.func,
   debouncedTime: PropTypes.number,
+  userFoodOnly: PropTypes.bool,
 }
 
 SearchFoodForm.defaultValue = {

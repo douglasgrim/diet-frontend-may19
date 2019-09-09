@@ -29,23 +29,9 @@ export class BoomPage extends React.Component {
       alcohol,
     } = this.props;
 
-      const addFood = () => {
-        externalActions.addFood({
-          protein: Number(protein) || 0,
-          shortDesc,
-          lipidTot: Number(lipidTot) || 0,
-          carbohydrt: Number(carbohydrt) || 0,
-          servingSize: Number(servingSize) || 0,
-          sugarTot: Number(sugarTot) || 0,
-          energKcal: Number(energKcal) || 0,
-          alcohol: Number(alcohol) || 0,
-        });
-      }
-
     return (
       <div>
         <div>Search</div>
-        <div onClick={() => navigateActions.addFoodGroup()}>Add Food Group</div>
         <SearchFoodForm 
           search={search}
           userSetText={userInputActions.userSetText}
@@ -61,10 +47,6 @@ export class BoomPage extends React.Component {
           )) }
           </div>
         </SearchFoodForm>
-        <AddFoodForm
-          {...this.props}
-          processFood={addFood}
-        />
       </div>
     );
   }

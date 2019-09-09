@@ -13,6 +13,12 @@ export const addFoodGroup = () => dispatch => {
   dispatch(clearSearches());
 }
 
+export const searchFoodGroups = () => dispatch => {
+  history.push(`/search-food-groups`);
+  dispatch(userClear());
+  dispatch(clearSearches());
+}
+
 export const editFood = (foodId, food) => (dispatch) => {
   dispatch(userSetText(food));
   history.push(`/edit-food/${foodId}`);
@@ -20,5 +26,11 @@ export const editFood = (foodId, food) => (dispatch) => {
 
 export const goHome = () => (dispatch) => {
   dispatch(userClear());
+  dispatch(clearSearches());
   history.push('/home');
+}
+
+export const addFood = () => (dispatch) => {
+  dispatch(userClear());
+  history.push('/add-food');
 }

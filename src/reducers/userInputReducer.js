@@ -3,6 +3,7 @@ import {
   USER_CLEAR,
   ADD_FOOD_TO_GROUP,
   EDIT_GROUP_SERVINGS,
+  REMOVE_GROUP_SERVING,
 } from '../constants/actionTypes';
 import clone from 'clone';
 import initialState from './initialState';
@@ -41,6 +42,10 @@ export default (state = initialState.userInput, action) => {
       });
       newState = { ...newState, groupContents };
       break;
+    case REMOVE_GROUP_SERVING:
+      groupContents = newState.groupContents || [];
+      groupContents = groupContents.filter(group => group.foodId !== action.foodId);
+      newState = { ...newState, groupContents };
   }
 
   return newState;

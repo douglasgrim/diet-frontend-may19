@@ -47,7 +47,6 @@ export const login = (email, password) => (dispatch) => {
 
 export const searchFood = (searchTerm, userOnly) => (dispatch) => {
   const type = userOnly ? 'SEARCH_USER_FOOD' : 'SEARCH_FOOD';
-  console.log('TYPE:', type);
   dispatch(init())
   .then(token => remoteData(type, { searchTerm, limit: 100 }, token))
   .then(({ result, jwt }) => {
@@ -69,7 +68,7 @@ export const editFood = (params) => (dispatch) => {
   .then(token => remoteData('EDIT_FOOD', params, token))
   .then(() => {
     dispatch(setData({ loadingIndicator: false }));
-    dispatch(userClear());
+    //dispatch(userClear());
   })
 }
 
@@ -111,4 +110,22 @@ export const addFoodGroup = () => (dispatch, getState) => {
     token
   ))
 };
+
+export const getKeyPair = (key, password) => (dispatch) => {
+  remoteData(
+    'GET_PAIR',
+    {
+      password,
+      key
+    }
+  )
+  .then(({ decrypted, ok }) => {
+    if (ok) {
+      dispatch(setData({ keypairResult: 'NOPE' }));
+    } else {
+      dispatch(setData({ keypairResult: decrypted }));
+    }
+  })
+};
+
 

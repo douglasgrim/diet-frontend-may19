@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import AddFoodForm from '../containers/AddFoodForm';
-import LoadingIndicator from '../simple/LoadingIndicator';
 
 import SearchFoodForm from '../containers/SearchFoodForm';
 
 import ProvideActions from '../hoc/ProvideActions';
 
 
-export class EditFoodPage extends React.Component {
+export class BoomPage extends React.Component {
 
   render() {
     const {
@@ -20,39 +19,25 @@ export class EditFoodPage extends React.Component {
       navigateActions,
       list,
       loadingIndicator,
-      protein,
-      lipidTot,
-      sugarTot,
-      carbohydrt,
-      energKcal,
-      shortDesc,
-      servingSize,
-      alcohol,
-      match: { params: { foodId } },
     } = this.props;
 
-    const editFood = () => {
-      externalActions.editFood({
-        protein: Number(protein) || 0,
-        shortDesc,
-        lipidTot: Number(lipidTot) || 0,
-        carbohydrt: Number(carbohydrt) || 0,
-        servingSize: Number(servingSize) || 0,
-        sugarTot: Number(sugarTot) || 0,
-        energKcal: Number(energKcal) || 0,
-        foodId,
-      });
-    }
 
     return (
       <div>
-        <div>EDIT THE FOOD!</div>
-        <AddFoodForm
-          {...this.props}
-          processFood={editFood}
-          buttonText="EDIT"
-        />
-        {loadingIndicator && <LoadingIndicator />}
+        <div>Search For Food Group</div>
+        <SearchFoodForm 
+          search={search}
+          userSetText={userInputActions.userSetText}
+          searchForValue={externalActions.searchFoodGroups}
+          list={list}
+          loadingIndicator={loadingIndicator}
+        >
+          <div>{list.map(group => (
+            <div key={group._id}>
+              {group.description}
+            </div>
+          ))}</div>
+        </SearchFoodForm>
       </div>
     );
   }
@@ -86,6 +71,6 @@ const mapStateToProps = ({ userInput: {
   };
 }
 
-const actionWrapped = ProvideActions(EditFoodPage);
+const actionWrapped = ProvideActions(BoomPage);
 export default connect(mapStateToProps)(actionWrapped);
 

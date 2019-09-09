@@ -4,11 +4,16 @@ import { connect } from 'react-redux';
 
 import ProvideActions from './hoc/ProvideActions';
 
+import Header from './Header';
+
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import DetailPage from './pages/DetailPage';
 import AddFoodGroupPage from './pages/AddFoodGroupPage';
 import EditFoodPage from './pages/EditFoodPage';
+import SearchFoodGroups from './pages/SearchFoodGroups';
+import AddFoodPage from './pages/AddFoodPage';
+import KeypairPage from './pages/KeypairPage';
 
 import PropTypes from "prop-types";
 import React from "react";
@@ -27,17 +32,18 @@ class App extends React.Component {
     } = this.props;
     return (
       <div className="app">
+        <Header navigateActions={navigateActions} />
         <div className="app-contents">
-          <div onClick={() => navigateActions.goHome()}>
-            &lt;- HOME
-          </div>
           <Switch>
             <Route exact path="/" component={LoginPage} />
+            <Route exact path="/keypair" component={KeypairPage} />
             {token && <React.Fragment>
               <Route exact path="/home" component={HomePage} />
               <Route exact path="/detail/:foodId" component={DetailPage} />
               <Route exact path="/add-food-group" component={AddFoodGroupPage} />
               <Route exact path="/edit-food/:foodId" component={EditFoodPage} />
+              <Route exact path="/search-food-groups" component={SearchFoodGroups} />
+              <Route exact path="/add-food" component={AddFoodPage} />
             </React.Fragment>}
             <Route component={LoginPage} />
           </Switch>

@@ -27,6 +27,7 @@ class AddFoodForm extends React.Component {
         shortDesc,
         servingSize,
         processFood,
+        buttonText = 'ADD',
       } = this.props;
 
       return (
@@ -64,7 +65,7 @@ class AddFoodForm extends React.Component {
               </div>
             </div>
           ))}
-          <div><button onClick={() => processFood()}>ADD</button></div>
+          <div><button onClick={() => processFood()}>{buttonText}</button></div>
         </div>
       );
 
